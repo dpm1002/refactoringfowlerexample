@@ -1,4 +1,4 @@
-package ubu.gii;
+package main.java.ubu.gii;
 public class VideoClubAplicacion {
 
 	public static void main(String[] arg) {
