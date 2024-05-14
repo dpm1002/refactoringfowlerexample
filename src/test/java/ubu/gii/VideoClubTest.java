@@ -1,4 +1,4 @@
-package ubu.gii;
+package test.java.ubu.gii;
 
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,9 +7,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import ubu.gii.Customer;
-import ubu.gii.Movie;
-import ubu.gii.Rental;
+import main.java.ubu.gii.Customer;
+import main.java.ubu.gii.Movie;
+import main.java.ubu.gii.Rental;
 
 /**
  * Tema Refactorizaciones
@@ -52,12 +52,21 @@ public class VideoClubTest {
 
 		String salida = c1.statement();
 
-		String salidaEsperada = new String("Rental Record for Manuel\n"
-				+ "\tSky Captain\t15.0\n" + "\tAccion Mutante\t2.0\n"
-				+ "\tHermano Oso\t12.0\n" + "Amount owed is 29.0\n"
-				+ "You earned 4 frequent renter points");
-
-		assertTrue(salidaEsperada.equals(salida),"Calcula mal el alquiler");
+		String expectedHtmlOutput = "<html><head><title>Rental Record</title></head><body>"
+                + "<h1>Rental Record for Manuel</h1>"
+                + "<table>"
+                + "<tr><th>Title</th><th>Amount</th></tr>"
+                + "<tr><td>Sky Captain</td><td>15,00</td></tr>"
+                + "<tr><td>Accion Mutante</td><td>2,00</td></tr>"
+                + "<tr><td>Hermano Oso</td><td>12,00</td></tr>"
+                + "</table>"
+                + "<p>Amount owed is 29,00</p>"
+                + "<p>You earned 4 frequent renter points</p>"
+                + "</body></html>";
+		System.out.println(salida);
+		System.out.println(expectedHtmlOutput);
+		
+		assertTrue(expectedHtmlOutput.equals(salida),"Calcula mal el alquiler");
 
 	}
 

@@ -1,4 +1,4 @@
-package ubu.gii;
+package main.java.ubu.gii;
 
 /**
 * Tema  Refactorizaciones 
@@ -34,26 +34,16 @@ public class Customer {
 		double totalAmount = 0;
 		int frequentRenterPoints = 0;
 		Iterator<Rental> rentals = _rentals.iterator();
-		String result = "Rental Record for " + getName() + "\n";
+		StringBuilder result=new StringBuilder();
+		result.append("<html><head><title>Rental Record</title></head><body>");
+        result.append("<h1>Rental Record for " + getName() + "</h1>");
+        result.append("<table>");
+        result.append("<tr><th>Title</th><th>Amount</th></tr>");
 		while (rentals.hasNext()) {
 			double thisAmount = 0;
 			Rental each = rentals.next();
 			// determine amounts for each line
-			switch (each.getMovie().getPriceCode()) {
-			case Movie.REGULAR:
-				thisAmount += 2;
-				if (each.getDaysRented() > 2)
-					thisAmount += (each.getDaysRented() - 2) * 1.5;
-				break;
-			case Movie.NEW_RELEASE:
-				thisAmount += each.getDaysRented() * 3;
-				break;
-			case Movie.CHILDRENS:
-				thisAmount += 1.5;
-				if (each.getDaysRented() > 3)
-					thisAmount += (each.getDaysRented() - 3) * 1.5;
-				break;
-			}
+			thisAmount = amountFor(each);
 			
 			// add frequent renter points
 			frequentRenterPoints++;
@@ -62,14 +52,34 @@ public class Customer {
 					&& each.getDaysRented() > 1)
 				frequentRenterPoints++;
 			// show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t"
-					+ String.valueOf(thisAmount) + "\n";
+			result.append("<tr><td>" + each.getMovie().getTitle() + "</td><td>" + String.format("%.2f", thisAmount) + "</td></tr>");
 			totalAmount += thisAmount;
 		}
 		// add footer lines
-		result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-		result += "You earned " + String.valueOf(frequentRenterPoints)
-				+ " frequent renter points";
-		return result;
+		result.append("</table>");
+        result.append("<p>Amount owed is " + String.format("%.2f", totalAmount) + "</p>");
+        result.append("<p>You earned " + frequentRenterPoints + " frequent renter points</p>");
+        result.append("</body></html>");
+		return result.toString();
+	}
+
+	private double amountFor(Rental each) {
+		double thisAmount = 0;
+		switch (each.getMovie().getPriceCode()) {
+		case Movie.REGULAR:
+			thisAmount += 2;
+			if (each.getDaysRented() > 2)
+				thisAmount += (each.getDaysRented() - 2) * 1.5;
+			break;
+		case Movie.NEW_RELEASE:
+			thisAmount += each.getDaysRented() * 3;
+			break;
+		case Movie.CHILDRENS:
+			thisAmount += 1.5;
+			if (each.getDaysRented() > 3)
+				thisAmount += (each.getDaysRented() - 3) * 1.5;
+			break;
+		}
+		return thisAmount;
 	}
 }
