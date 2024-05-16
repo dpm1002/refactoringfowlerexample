@@ -42,10 +42,9 @@ public class Customer {
 		while (rentals.hasNext()) {
 			double thisAmount = 0;
 			Rental each = rentals.next();
-			// determine amounts for each line
 			thisAmount = amountFor(each);
 			
-			// add frequent renter points
+			
 			frequentRenterPoints++;
 			// add bonus for a two day new release rental
 			if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE)
