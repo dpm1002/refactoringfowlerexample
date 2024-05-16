@@ -2,10 +2,10 @@ package main.java.ubu.gii;
 /**
  * Tema Refactorizaciones
  * 
- * Ejemplo de aplicación de refactorizaciones. Actualizado para colecciones
- * genéricas de java 1.5.
+ * Ejemplo de aplicaciÃ³n de refactorizaciones. Actualizado para colecciones
+ * genÃ©ricas de java 1.5.
  * 
- * @author M. Fowler y <A HREF="mailto:clopezno@ubu.es">Carlos López</A>
+ * @author M. Fowler y <A HREF="mailto:clopezno@ubu.es">Carlos LÃ³pez</A>
  * @version 1.1
  * @see java.io.File
  * 
@@ -49,6 +49,6 @@ public class Movie {
 	}
 
 	public int getFrequentPoint(int rental) {
-		return _priceCode.getFrequentPoint(this, rental);
+		return _priceCode.getFrequentPoint(rental);
 	}
 }
