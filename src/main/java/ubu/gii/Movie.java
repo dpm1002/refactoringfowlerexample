@@ -51,4 +51,13 @@ public class Movie implements Prize {
 		}
 		return thisAmount;
 	}
+
+	int getFrequentPoint(Rental rental) {
+		int frequentRenterPoints = 1;
+		// add bonus for a two day new release rental
+		if ((rental.getMovie().getPriceCode() == Prize.NEW_RELEASE)
+				&& rental.getDaysRented() > 1)
+			frequentRenterPoints++;
+		return frequentRenterPoints;
+	}
 }
