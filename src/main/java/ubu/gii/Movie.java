@@ -13,9 +13,9 @@ package main.java.ubu.gii;
 
 public class Movie {
 	
-	static int CHILDRENS = 2;
-	static int REGULAR = 0;
-	static int NEW_RELEASE = 1;
+	public static final int CHILDRENS = 2;
+	public static final int REGULAR = 0;
+	public static final int NEW_RELEASE = 1;
 	
 	private String _title;
 	private Prize _priceCode;
