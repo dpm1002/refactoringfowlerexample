@@ -11,11 +11,7 @@ package main.java.ubu.gii;
  * 
  */
 
-public class Movie {
-	public static final int CHILDRENS = 2;
-	public static final int REGULAR = 0;
-	public static final int NEW_RELEASE = 1;
-
+public class Movie implements Prize {
 	private String _title;
 	private int _priceCode;
 
@@ -39,15 +35,15 @@ public class Movie {
 	double getCharge(Rental rental) {
 		double thisAmount = 0;
 		switch (rental.getMovie().getPriceCode()) {
-		case Movie.REGULAR:
+		case Prize.REGULAR:
 			thisAmount += 2;
 			if (rental.getDaysRented() > 2)
 				thisAmount += (rental.getDaysRented() - 2) * 1.5;
 			break;
-		case Movie.NEW_RELEASE:
+		case Prize.NEW_RELEASE:
 			thisAmount += rental.getDaysRented() * 3;
 			break;
-		case Movie.CHILDRENS:
+		case Prize.CHILDRENS:
 			thisAmount += 1.5;
 			if (rental.getDaysRented() > 3)
 				thisAmount += (rental.getDaysRented() - 3) * 1.5;
