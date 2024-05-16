@@ -8,4 +8,13 @@ public class RegularPrize extends Prize{
 		return Movie.REGULAR;
 	}
 
+	public double getCharge(int rental) {
+		
+		double thisAmount = 2;
+		if (rental > 2)
+			thisAmount += (rental - 2) * 1.5;
+			
+		return thisAmount;
+	}
+
 }

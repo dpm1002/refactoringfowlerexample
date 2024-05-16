@@ -8,4 +8,10 @@ public class NewReleasePrize extends Prize{
 		return Movie.NEW_RELEASE;
 	}
 
+	public double getCharge(int rental) {
+		
+		return rental * 3;
+		
+	}
+
 }

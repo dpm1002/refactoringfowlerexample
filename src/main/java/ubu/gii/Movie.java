@@ -44,7 +44,7 @@ public class Movie {
 	}
 
 	
-	public double getCharge(Rental rental) {
+	public double getCharge(int rental) {
 		return _priceCode.getCharge(rental);
 	}
 
