@@ -11,39 +11,51 @@ package main.java.ubu.gii;
  * 
  */
 
-public class Movie implements Prize {
+public class Movie {
+	
+	static int CHILDRENS = 2;
+	static int REGULAR = 0;
+	static int NEW_RELEASE = 1;
+	
 	private String _title;
-	private int _priceCode;
+	private Prize _priceCode;
 
 	public Movie(String title, int priceCode) {
 		_title = title;
-		_priceCode = priceCode;
+		setPriceCode(priceCode);;
 	}
 
 	public int getPriceCode() {
-		return _priceCode;
+		return _priceCode.getPriceCode();
 	}
 
 	public void setPriceCode(int arg) {
-		_priceCode = arg;
+		if(arg==REGULAR) {
+			_priceCode=new RegularPrize();
+		}else if(arg==CHILDRENS){
+			_priceCode=new ChildrenPrize();
+		}else {
+			_priceCode=new NewReleasePrize();
+		}
 	}
 
 	public String getTitle() {
 		return _title;
 	}
 
-	double getCharge(Rental rental) {
+	
+	public double getCharge(Rental rental) {
 		double thisAmount = 0;
 		switch (rental.getMovie().getPriceCode()) {
-		case Prize.REGULAR:
+		case 0:
 			thisAmount += 2;
 			if (rental.getDaysRented() > 2)
 				thisAmount += (rental.getDaysRented() - 2) * 1.5;
 			break;
-		case Prize.NEW_RELEASE:
+		case 1:
 			thisAmount += rental.getDaysRented() * 3;
 			break;
-		case Prize.CHILDRENS:
+		case 2:
 			thisAmount += 1.5;
 			if (rental.getDaysRented() > 3)
 				thisAmount += (rental.getDaysRented() - 3) * 1.5;
@@ -52,10 +64,10 @@ public class Movie implements Prize {
 		return thisAmount;
 	}
 
-	int getFrequentPoint(Rental rental) {
+	public int getFrequentPoint(Rental rental) {
 		int frequentRenterPoints = 1;
 		// add bonus for a two day new release rental
-		if ((rental.getMovie().getPriceCode() == Prize.NEW_RELEASE)
+		if ((rental.getMovie().getPriceCode() == NEW_RELEASE)
 				&& rental.getDaysRented() > 1)
 			frequentRenterPoints++;
 		return frequentRenterPoints;

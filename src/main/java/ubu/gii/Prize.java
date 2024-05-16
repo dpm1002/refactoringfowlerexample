@@ -1,9 +1,7 @@
 package main.java.ubu.gii;
 
-public interface Prize {
+public abstract class Prize {
 
-	int CHILDRENS = 2;
-	int REGULAR = 0;
-	int NEW_RELEASE = 1;
+	public abstract int getPriceCode();
 
 }
