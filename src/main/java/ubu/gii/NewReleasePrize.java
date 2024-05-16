@@ -14,4 +14,13 @@ public class NewReleasePrize extends Prize{
 		
 	}
 
+	public int getFrequentPoint(int rental) {
+		int frequentRenterPoints = 1;
+		// add bonus for a two day new release rental
+		if ((getPriceCode() == Movie.NEW_RELEASE)
+				&& rental > 1)
+			frequentRenterPoints++;
+		return frequentRenterPoints;
+	}
+
 }

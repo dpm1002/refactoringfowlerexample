@@ -16,4 +16,9 @@ public class ChildrenPrize extends Prize{
 		return thisAmount;
 	}
 
+	public int getFrequentPoint(int rental) {
+		int frequentRenterPoints = 1;
+		return frequentRenterPoints;
+	}
+
 }
