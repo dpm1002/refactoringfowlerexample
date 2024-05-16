@@ -39,17 +39,14 @@ public class Customer {
         result.append("<h1>Rental Record for " + getName() + "</h1>");
         result.append("<table>");
         result.append("<tr><th>Title</th><th>Amount</th></tr>");
+        double thisAmount = 0;
 		while (rentals.hasNext()) {
-			double thisAmount = 0;
+			
 			Rental each = rentals.next();
-			thisAmount = getCharge(each);
+			thisAmount = each.getCharge();
 			
 			
-			frequentRenterPoints++;
-			// add bonus for a two day new release rental
-			if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE)
-					&& each.getDaysRented() > 1)
-				frequentRenterPoints++;
+			frequentRenterPoints += each.getFrequentPoint();
 			// show figures for this rental
 			result.append("<tr><td>" + each.getMovie().getTitle() + "</td><td>" + String.format("%.2f", thisAmount) + "</td></tr>");
 			totalAmount += thisAmount;
@@ -62,10 +59,4 @@ public class Customer {
 		return result.toString();
 	}
 
-	/**
-	 * @deprecated Use {@link ubu.gii.Rental#getCharge()} instead
-	 */
-	private double getCharge(Rental aRental) {
-		return aRental.getCharge();
-	}
 }
