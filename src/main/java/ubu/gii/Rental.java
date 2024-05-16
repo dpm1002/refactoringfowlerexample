@@ -2,10 +2,10 @@ package main.java.ubu.gii;
 /**
  * Tema Refactorizaciones
  * 
- * Ejemplo de aplicaciÃ³n de refactorizaciones. Actualizado para colecciones
- * genÃ©ricas de java 1.5.
+ * Ejemplo de aplicación de refactorizaciones. Actualizado para colecciones
+ * genéricas de java 1.5.
  * 
- * @author M. Fowler y <A HREF="mailto:clopezno@ubu.es">Carlos LÃ³pez</A>
+ * @author M. Fowler y <A HREF="mailto:clopezno@ubu.es">Carlos López</A>
  * @version 1.1
  * @see java.io.File
  * 
@@ -13,6 +13,7 @@ package main.java.ubu.gii;
 public class Rental {
 	private Movie _movie;
 	private int _daysRented;
+	
 
 	public Rental(Movie movie, int daysRented) {
 		_movie = movie;
@@ -25,6 +26,14 @@ public class Rental {
 
 	public Movie getMovie() {
 		return _movie;
+	}
+
+	double getCharge() {
+		return _movie.getCharge(this.getDaysRented());
+	}
+
+	int getFrequentPoint() {
+		return _movie.getFrequentPoint(this.getDaysRented());
 	}
 
 }

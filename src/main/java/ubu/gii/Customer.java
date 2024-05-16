@@ -39,18 +39,14 @@ public class Customer {
         result.append("<h1>Rental Record for " + getName() + "</h1>");
         result.append("<table>");
         result.append("<tr><th>Title</th><th>Amount</th></tr>");
+        double thisAmount = 0;
 		while (rentals.hasNext()) {
-			double thisAmount = 0;
-			Rental each = rentals.next();
-			// determine amounts for each line
-			thisAmount = amountFor(each);
 			
-			// add frequent renter points
-			frequentRenterPoints++;
-			// add bonus for a two day new release rental
-			if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE)
-					&& each.getDaysRented() > 1)
-				frequentRenterPoints++;
+			Rental each = rentals.next();
+			thisAmount = each.getCharge();
+			
+			
+			frequentRenterPoints += each.getFrequentPoint();
 			// show figures for this rental
 			result.append("<tr><td>" + each.getMovie().getTitle() + "</td><td>" + String.format("%.2f", thisAmount) + "</td></tr>");
 			totalAmount += thisAmount;
@@ -63,23 +59,4 @@ public class Customer {
 		return result.toString();
 	}
 
-	private double amountFor(Rental each) {
-		double thisAmount = 0;
-		switch (each.getMovie().getPriceCode()) {
-		case Movie.REGULAR:
-			thisAmount += 2;
-			if (each.getDaysRented() > 2)
-				thisAmount += (each.getDaysRented() - 2) * 1.5;
-			break;
-		case Movie.NEW_RELEASE:
-			thisAmount += each.getDaysRented() * 3;
-			break;
-		case Movie.CHILDRENS:
-			thisAmount += 1.5;
-			if (each.getDaysRented() > 3)
-				thisAmount += (each.getDaysRented() - 3) * 1.5;
-			break;
-		}
-		return thisAmount;
-	}
 }
